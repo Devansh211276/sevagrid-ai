@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SevaSetu — Rapid Crisis Innovation Platform</title>
+<meta name="description" content="SevaSetu combines India's ancient spirit of Seva with modern Google technology to enable rapid crisis response coordination.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Background -->
+  <div class="ambient-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 2L24 8V20L14 26L4 20V8L14 2Z" fill="url(#logoGrad)" stroke="none"/>
+          <path d="M14 8L19 11V17L14 20L9 17V11L14 8Z" fill="rgba(255,255,255,0.3)"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="4" y1="2" x2="24" y2="26" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF6B35"/>
+              <stop offset="1" stop-color="#F7931E"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-name">SevaSetu</div>
+        <div class="logo-tagline">Crisis Bridge</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">OVERVIEW</div>
+      <a class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+        <span class="nav-icon">🗺️</span>
+        <span>Seva Dashboard</span>
+        <span class="nav-badge live">LIVE</span>
+      </a>
+      <a class="nav-item" data-tab="registry" onclick="switchTab('registry')">
+        <span class="nav-icon">📦</span>
+        <span>Resource Registry</span>
+      </a>
+      <a class="nav-item" data-tab="voice" onclick="switchTab('voice')">
+        <span class="nav-icon">🎙️</span>
+        <span>Voice-to-Task</span>
+        <span class="nav-badge ai">AI</span>
+      </a>
+      <a class="nav-item" data-tab="sevaai" onclick="switchTab('sevaai')">
+        <span class="nav-icon">🧠</span>
+        <span>SevaGrid AI</span>
+        <span class="nav-badge ai">CORE</span>
+      </a>
+      <a class="nav-item" data-tab="ledger" onclick="switchTab('ledger')">
+        <span class="nav-icon">📜</span>
+        <span>Trust Ledger</span>
+      </a>
+
+      <div class="nav-section-label" style="margin-top:24px">CRISIS STATUS</div>
+      <div class="crisis-card">
+        <div class="crisis-label">Active Alerts</div>
+        <div class="crisis-value" id="alertCount">7</div>
+        <div class="crisis-bar"><div class="crisis-fill" style="width:70%"></div></div>
+      </div>
+      <div class="crisis-card">
+        <div class="crisis-label">Volunteers Active</div>
+        <div class="crisis-value" id="volCount">342</div>
+        <div class="crisis-bar"><div class="crisis-fill green" style="width:85%"></div></div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="powered-by">Powered by Google Cloud</div>
+      <div class="hackathon-badge">🏆 Hackathon 2025</div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="page-title" id="pageTitle">Seva Dashboard</div>
+        <div class="page-subtitle" id="pageSubtitle">Real-time crisis heatmap powered by Maps JS API</div>
+      </div>
+      <div class="topbar-right">
+        <div class="status-pill">
+          <span class="pulse-dot"></span>
+          System Operational
+        </div>
+        <div class="time-display" id="timeDisplay"></div>
+        <div class="avatar">DK</div>
+      </div>
+    </header>
+
+    <!-- ===== TAB: DASHBOARD ===== -->
+    <section class="tab-content active" id="tab-dashboard">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon orange">🔥</div>
+          <div class="stat-info">
+            <div class="stat-value">7</div>
+            <div class="stat-label">Active Crisis Zones</div>
+          </div>
+          <div class="stat-trend up">↑ 2</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon blue">👥</div>
+          <div class="stat-info">
+            <div class="stat-value">342</div>
+            <div class="stat-label">Volunteers Deployed</div>
+          </div>
+          <div class="stat-trend up">↑ 28</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">📦</div>
+          <div class="stat-info">
+            <div class="stat-value">1,284</div>
+            <div class="stat-label">Resources Tracked</div>
+          </div>
+          <div class="stat-trend down">↓ 45</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon purple">✅</div>
+          <div class="stat-info">
+            <div class="stat-value">89%</div>
+            <div class="stat-label">Tasks Completed</div>
+          </div>
+          <div class="stat-trend up">↑ 4%</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Heatmap -->
+        <div class="card map-card">
+          <div class="card-header">
+            <div class="card-title">🗺️ Live Crisis Heatmap — India</div>
+            <div class="card-actions">
+              <button class="chip active" onclick="filterMap('all')">All</button>
+              <button class="chip" onclick="filterMap('flood')">Flood</button>
+              <button class="chip" onclick="filterMap('fire')">Fire</button>
+              <button class="chip" onclick="filterMap('medical')">Medical</button>
+            </div>
+          </div>
+          <div class="map-container" id="mapContainer">
+            <svg class="india-map" viewBox="0 0 500 560" id="indiaSvg">
+              <!-- Simplified India outline -->
+              <defs>
+                <radialGradient id="mapBg" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#1a2a3a"/>
+                  <stop offset="100%" stop-color="#0d1520"/>
+                </radialGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <rect width="500" height="560" fill="url(#mapBg)" rx="12"/>
+              <!-- Grid lines -->
+              <g opacity="0.1" stroke="#4fc3f7" stroke-width="0.5">
+                <line x1="0" y1="112" x2="500" y2="112"/>
+                <line x1="0" y1="224" x2="500" y2="224"/>
+                <line x1="0" y1="336" x2="500" y2="336"/>
+                <line x1="0" y1="448" x2="500" y2="448"/>
+                <line x1="100" y1="0" x2="100" y2="560"/>
+                <line x1="200" y1="0" x2="200" y2="560"/>
+                <line x1="300" y1="0" x2="300" y2="560"/>
+                <line x1="400" y1="0" x2="400" y2="560"/>
+              </g>
+              <!-- India shape (simplified) -->
+              <path d="M200,40 L280,35 L330,60 L360,100 L380,150 L390,200 L400,250 L410,290 L400,330 L380,370 L350,400 L320,430 L290,460 L260,490 L250,510 L240,490 L210,460 L180,430 L150,400 L120,370 L100,330 L90,290 L100,250 L110,210 L120,170 L130,130 L150,90 L170,60 Z" 
+                fill="rgba(30,60,90,0.6)" stroke="rgba(100,160,220,0.4)" stroke-width="1.5"/>
+              
+              <!-- Crisis hotspots -->
+              <g id="hotspots"></g>
+              
+              <!-- City labels -->
+              <text x="195" y="155" fill="rgba(200,220,255,0.6)" font-size="9" font-family="Inter">Delhi</text>
+              <text x="145" y="265" fill="rgba(200,220,255,0.6)" font-size="9" font-family="Inter">Mumbai</text>
+              <text x="295" y="295" fill="rgba(200,220,255,0.6)" font-size="9" font-family="Inter">Kolkata</text>
+              <text x="230" y="390" fill="rgba(200,220,255,0.6)" font-size="9" font-family="Inter">Chennai</text>
+              <text x="205" y="320" fill="rgba(200,220,255,0.6)" font-size="9" font-family="Inter">Hyderabad</text>
+              <text x="165" y="230" fill="rgba(200,220,255,0.6)" font-size="9" font-family="Inter">Ahmedabad</text>
+            </svg>
+            <div class="map-legend">
+              <div class="legend-item"><span class="legend-dot red"></span>Critical</div>
+              <div class="legend-item"><span class="legend-dot orange"></span>High</div>
+              <div class="legend-item"><span class="legend-dot yellow"></span>Medium</div>
+              <div class="legend-item"><span class="legend-dot green"></span>Resolved</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerts feed -->
+        <div class="card alerts-card">
+          <div class="card-header">
+            <div class="card-title">⚡ Live Alerts</div>
+            <div class="alert-counter" id="alertBadge">7 Active</div>
+          </div>
+          <div class="alerts-list" id="alertsList"></div>
+        </div>
+      </div>
+
+      <!-- History Inspiration Banner -->
+      <div class="heritage-banner">
+        <div class="heritage-icon">🏛️</div>
+        <div class="heritage-text">
+          <div class="heritage-title">Inspired by Ancient Indian Crisis Management</div>
+          <div class="heritage-desc">The Mauryan Empire's <em>Rajuka</em> officers acted as district crisis managers — SevaSetu digitizes this 2300-year-old model with AI and real-time data.</div>
+        </div>
+        <div class="heritage-stat">
+          <div class="heritage-stat-val">2300</div>
+          <div class="heritage-stat-label">Years of Wisdom</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: RESOURCE REGISTRY ===== -->
+    <section class="tab-content" id="tab-registry">
+      <div class="registry-toolbar">
+        <div class="search-box">
+          <span>🔍</span>
+          <input type="text" placeholder="Search resources..." id="resourceSearch" oninput="filterResources()">
+        </div>
+        <div class="toolbar-actions">
+          <select class="select-filter" id="categoryFilter" onchange="filterResources()">
+            <option value="all">All Categories</option>
+            <option value="medical">Medical</option>
+            <option value="food">Food & Water</option>
+            <option value="shelter">Shelter</option>
+            <option value="rescue">Rescue</option>
+          </select>
+          <button class="btn-primary" onclick="openAddResource()">+ Add Resource</button>
+        </div>
+      </div>
+
+      <div class="resource-grid" id="resourceGrid"></div>
+
+      <!-- Add Resource Modal -->
+      <div class="modal-overlay" id="addResourceModal">
+        <div class="modal">
+          <div class="modal-header">
+            <div class="modal-title">Add New Resource</div>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Resource Name</label>
+              <input type="text" class="form-input" id="resName" placeholder="e.g., Water Bottles">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Category</label>
+                <select class="form-input" id="resCat">
+                  <option value="medical">Medical</option>
+                  <option value="food">Food & Water</option>
+                  <option value="shelter">Shelter</option>
+                  <option value="rescue">Rescue</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" class="form-input" id="resQty" placeholder="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" class="form-input" id="resLoc" placeholder="e.g., Delhi Warehouse 3">
+            </div>
+            <button class="btn-primary full-width" onclick="addResource()">Add to Registry</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: VOICE TO TASK ===== -->
+    <section class="tab-content" id="tab-voice">
+      <div class="voice-layout">
+        <div class="card voice-card">
+          <div class="voice-hero">
+            <div class="gemini-badge">✨ Powered by Gemini 3 Multimodal</div>
+            <h2 class="voice-title">Voice-to-Task AI</h2>
+            <p class="voice-subtitle">Speak your crisis update — AI converts it to actionable tasks instantly</p>
+            
+            <div class="voice-visualizer" id="voiceViz">
+              <div class="viz-ring ring-1"></div>
+              <div class="viz-ring ring-2"></div>
+              <div class="viz-ring ring-3"></div>
+              <button class="mic-btn" id="micBtn" onclick="toggleVoice()">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M16 4C14.3 4 13 5.3 13 7V17C13 18.7 14.3 20 16 20C17.7 20 19 18.7 19 17V7C19 5.3 17.7 4 16 4Z" fill="white"/>
+                  <path d="M9 15C9 19.4 12.1 23 16 23C19.9 23 23 19.4 23 15H25C25 20.2 21.4 24.5 16.7 25.4V29H15.3V25.4C10.6 24.5 7 20.2 7 15H9Z" fill="white"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="voice-status" id="voiceStatus">Tap to speak a crisis update</div>
+            
+            <div class="sample-prompts">
+              <div class="sample-label">Try saying:</div>
+              <div class="samples">
+                <button class="sample-chip" onclick="simulateVoice('Flood in Patna — 200 families displaced, need food and water urgently')">Flood emergency</button>
+                <button class="sample-chip" onclick="simulateVoice('Medical camp needed at Jaipur district 4, running low on medicines and bandages')">Medical shortage</button>
+                <button class="sample-chip" onclick="simulateVoice('Fire at Surat textile market, rescue team required, 50 trapped workers')">Fire rescue</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="voice-output-panel">
+          <div class="card transcript-card">
+            <div class="card-title">📝 Transcript</div>
+            <div class="transcript-box" id="transcriptBox">
+              <div class="transcript-placeholder">Voice transcript will appear here...</div>
+            </div>
+          </div>
+
+          <div class="card tasks-generated-card">
+            <div class="card-title">🤖 AI-Generated Tasks <span class="gemini-tag">Gemini</span></div>
+            <div class="generated-tasks" id="generatedTasks">
+              <div class="transcript-placeholder">Generated tasks will appear here after voice input...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: TRUST LEDGER ===== -->
+    <section class="tab-content" id="tab-ledger">
+      <div class="ledger-header-row">
+        <div class="ledger-stats">
+          <div class="ledger-stat-card">
+            <div class="ls-icon">👤</div>
+            <div class="ls-val">482</div>
+            <div class="ls-label">Total Volunteers</div>
+          </div>
+          <div class="ledger-stat-card">
+            <div class="ls-icon">⭐</div>
+            <div class="ls-val">12,840</div>
+            <div class="ls-label">Seva Points Earned</div>
+          </div>
+          <div class="ledger-stat-card">
+            <div class="ls-icon">✅</div>
+            <div class="ls-val">3,291</div>
+            <div class="ls-label">Tasks Verified</div>
+          </div>
+          <div class="ledger-stat-card">
+            <div class="ls-icon">🏅</div>
+            <div class="ls-val">94%</div>
+            <div class="ls-label">Trust Score Avg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ledger-grid">
+        <div class="card leaderboard-card">
+          <div class="card-header">
+            <div class="card-title">🏆 Volunteer Leaderboard</div>
+            <div class="firebase-badge">Firebase Analytics</div>
+          </div>
+          <div class="leaderboard-list" id="leaderboardList"></div>
+        </div>
+
+        <div class="card activity-card">
+          <div class="card-header">
+            <div class="card-title">📋 Activity Log</div>
+          </div>
+          <div class="activity-log" id="activityLog"></div>
+        </div>
+      </div>
+
+      <div class="heritage-banner" style="margin-top:20px">
+        <div class="heritage-icon">⚖️</div>
+        <div class="heritage-text">
+          <div class="heritage-title">The Dharmashastra Accountability Model</div>
+          <div class="heritage-desc">Ancient Indian governance texts prescribed transparent public service records. SevaSetu's Trust Ledger makes every volunteer's contribution visible, tamper-proof and verifiable — a digital <em>Karma Khataa</em>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: SEVAAI COMMAND CENTER ===== -->
+    <section class="tab-content" id="tab-sevaai">
+      <!-- API key banner -->
+      <div class="ai-key-bar" id="aiKeyBar">
+        <span class="ai-key-icon">🔑</span>
+        <span id="aiKeyStatus">Enter Gemini API key for hybrid AI mode</span>
+        <button class="ai-key-btn" onclick="openKeyModal()">Set Key</button>
+        <button class="ai-key-btn secondary" onclick="dismissKeyBar()">Use Local Mode</button>
+      </div>
+
+      <!-- Stats row -->
+      <div class="ai-stats-row">
+        <div class="ai-stat-pill" id="aiModePill">🧠 Local Brain Active</div>
+        <div class="ai-stat-pill">
+          <span id="aiCacheHits">0</span> cached · <span id="aiNetworkCalls">0</span> network calls
+        </div>
+        <div class="ai-stat-pill" id="aiRiskPill">Risk Level: —</div>
+      </div>
+
+      <!-- Main AI Grid -->
+      <div class="ai-grid">
+
+        <!-- Chat Panel -->
+        <div class="card ai-chat-card">
+          <div class="card-header">
+            <div class="card-title">🧠 SevaGrid AI Command</div>
+            <div class="gemini-badge" style="font-size:11px">gemini-2.0-flash-lite</div>
+          </div>
+          <div class="ai-chat-messages" id="aiChatMessages">
+            <div class="ai-msg assistant">
+              <div class="ai-msg-avatar">🧠</div>
+              <div class="ai-msg-bubble">SevaGrid AI online. I have full situational awareness of all active crisis zones and resource inventory. How can I assist coordination?</div>
+            </div>
+          </div>
+          <div class="ai-quick-prompts">
+            <button class="ai-qp-btn" onclick="aiQuickPrompt('What is the current overall risk level?')">📊 Risk Level</button>
+            <button class="ai-qp-btn" onclick="aiQuickPrompt('Which zones need immediate response?')">🚨 Priority Zones</button>
+            <button class="ai-qp-btn" onclick="aiQuickPrompt('Optimize resource allocation across all active alerts')">📦 Optimize Resources</button>
+            <button class="ai-qp-btn" onclick="aiQuickPrompt('Draft evacuation plan for flood zones')">📋 Evacuation Plan</button>
+          </div>
+          <div class="ai-input-row">
+            <input class="ai-input" id="aiChatInput" placeholder="Ask SevaGrid AI anything about the crisis..." onkeydown="if(event.key==='Enter')sendAiChat()">
+            <button class="ai-send-btn" id="aiSendBtn" onclick="sendAiChat()">➤</button>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="ai-right-panel">
+
+          <!-- Intelligence Brief -->
+          <div class="card ai-brief-card">
+            <div class="card-header">
+              <div class="card-title">📡 Situation Intelligence</div>
+              <button class="chip" onclick="refreshBrief()">↻ Refresh</button>
+            </div>
+            <div class="ai-brief-content" id="aiBriefContent">
+              <div class="ai-brief-loading">Generating intelligence brief...</div>
+            </div>
+          </div>
+
+          <!-- Zone Risk Scorer -->
+          <div class="card ai-risk-card">
+            <div class="card-header">
+              <div class="card-title">🎯 Zone Risk Assessor</div>
+            </div>
+            <div class="ai-risk-zones" id="aiRiskZones"></div>
+          </div>
+
+          <!-- Resource Optimizer -->
+          <div class="card ai-opt-card">
+            <div class="card-header">
+              <div class="card-title">📦 Resource Optimizer</div>
+              <button class="chip" onclick="runOptimizer()">▶ Run</button>
+            </div>
+            <div class="ai-opt-output" id="aiOptOutput">
+              <div class="ai-brief-loading">Click Run to generate allocation plan...</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- API Key Modal -->
+  <div class="modal-overlay" id="apiKeyModal">
+    <div class="modal ai-key-modal">
+      <div class="modal-header">
+        <div class="modal-title">🔑 Connect Gemini API</div>
+        <button class="modal-close" onclick="closeKeyModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="ai-key-info">
+          <p>SevaGrid AI runs locally by default (zero network). Optionally connect to <strong>Gemini 2.0 Flash-Lite</strong> for enhanced natural language understanding on complex cases.</p>
+          <ul class="ai-key-list">
+            <li>✅ Key stored in session only — never persisted</li>
+            <li>✅ Minimum API calls — local brain handles 95% of queries</li>
+            <li>✅ Compressed prompts ≤ 200 tokens per call</li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label>Google AI Studio API Key</label>
+          <input type="password" class="form-input" id="geminiKeyInput" placeholder="AIza...">
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn-primary full-width" onclick="saveApiKey()">Connect</button>
+          <button class="btn-secondary full-width" onclick="closeKeyModal()">Skip — Local Mode</button>
+        </div>
+        <div class="ai-key-footnote">Get a free key at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a></div>
+      </div>
+    </div>
+  </div>
+
+<script src="sevaai.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
